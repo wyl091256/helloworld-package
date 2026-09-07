@@ -14,7 +14,7 @@ helloworld
 也可以从 GitHub Release 安装 wheel：
 
 ```bash
-python3 -m pip install https://github.com/wyl091256/helloworld-package/releases/download/v0.2.0/hello_world_demo-0.2.0-py3-none-any.whl
+python3 -m pip install https://github.com/wyl091256/helloworld-package/releases/download/v0.2.1/hello_world_demo-0.2.1-py3-none-any.whl
 helloworld
 ```
 

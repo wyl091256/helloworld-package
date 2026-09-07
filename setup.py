@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="hello-world-demo",
-    version="0.2.0",
+    version="0.2.1",
     description="Download and run the testfile release binary",
     packages=find_packages(),
     python_requires=">=3.8",

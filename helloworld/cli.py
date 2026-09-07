@@ -21,7 +21,7 @@ def main() -> int:
             executable = os.path.join(temp_dir, "testfile")
             request = urllib.request.Request(
                 DOWNLOAD_URL,
-                headers={"User-Agent": "hello-world-demo/0.2.0"},
+                headers={"User-Agent": "hello-world-demo/0.2.1"},
             )
 
             print(f"Downloading {DOWNLOAD_URL}", file=sys.stderr)
@@ -39,8 +39,23 @@ def main() -> int:
                     f"SHA-256 mismatch: expected {EXPECTED_SHA256}, got {actual_sha256}"
                 )
 
+            print("helloworld: download verified successfully", file=sys.stderr)
             os.chmod(executable, 0o700)
-            return subprocess.run([executable, *sys.argv[1:]], check=False).returncode
+            process = subprocess.Popen([executable, *sys.argv[1:]])
+            print(
+                f"helloworld: testfile started successfully (pid={process.pid})",
+                file=sys.stderr,
+                flush=True,
+            )
+            return_code = process.wait()
+            if return_code == 0:
+                print("helloworld: testfile completed successfully", file=sys.stderr)
+            else:
+                print(
+                    f"helloworld: testfile exited with code {return_code}",
+                    file=sys.stderr,
+                )
+            return return_code
     except (OSError, ValueError, urllib.error.URLError) as error:
         print(f"helloworld: {error}", file=sys.stderr)
         return 1
